@@ -50,9 +50,4 @@ Overview
    :maxdepth: 3
    :titlesonly:
 
-   docs/core/reference/introduction
-
-.. toctree::
-   :maxdepth: 2
-   
-   docs/core/guide/core-guide-introduction
+   reference/introduction
