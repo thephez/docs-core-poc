@@ -1,3 +1,6 @@
+Control Messages
+****************
+
 The following <> messages all help control the connection between two <>
 or allow them to advise each other about the rest of the network.
 

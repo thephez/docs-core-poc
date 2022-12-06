@@ -1,3 +1,6 @@
+Quorum Messages
+***************
+
 The following network messages enable the long-living masternode quorum
 (<>) features built in to Dash.
 

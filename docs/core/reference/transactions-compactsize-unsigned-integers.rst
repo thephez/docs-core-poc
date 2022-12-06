@@ -1,3 +1,6 @@
+CompactSize Unsigned Integers
+*****************************
+
 The <> format and several peer-to-peer network messages use a type of
 variable-length integer to indicate the number of bytes in a following
 piece of data.

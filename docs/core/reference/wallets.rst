@@ -1,3 +1,6 @@
+Wallets
+*******
+
 Deterministic Wallet Formats
 ============================
 

@@ -1,3 +1,6 @@
+Raw Transaction Format
+**********************
+
 Dash transactions are broadcast between <> in a serialized byte format,
 called <>. It is this form of a transaction which is SHA256(SHA256())
 hashed to create the <> and, ultimately, the <> of a <> containing the
@@ -198,7 +201,8 @@ special transaction:
      "instantlock": false
    }
 
-# TxIn: A Transaction Input (Non-Coinbase)
+TxIn: A Transaction Input (Non-Coinbase)
+========================================
 
 Each non- <> <> spends an outpoint from a previous transaction.
 (Coinbase inputs are described separately after the example section
@@ -261,7 +265,8 @@ below.)
 |          |                   |                       | 0xffffffff.  |
 +----------+-------------------+-----------------------+--------------+
 
-# Outpoint: The Specific Part Of A Specific Output
+Outpoint: The Specific Part Of A Specific Output
+================================================
 
 Because a single transaction can include multiple <>, the <> structure
 includes both a <> and an output index number to refer to specific
@@ -285,7 +290,8 @@ output.
 |           |           |                   | 0x00000000.            |
 +-----------+-----------+-------------------+------------------------+
 
-# TxOut: A Transaction Output
+TxOut: A Transaction Output
+===========================
 
 Each <> spends a certain number of <>, placing them under control of
 anyone who can satisfy the provided <>.
@@ -372,7 +378,8 @@ paying to a new pay-to-pubkey-hash (P2PKH) output.
 
    00000000 ................................... locktime: 0 (a block height)
 
-# Coinbase Input: The Input Of The First Transaction In A Block
+Coinbase Input: The Input Of The First Transaction In A Block
+=============================================================
 
 The first transaction in a <>, called the <>, must have exactly one
 input, called a <>. The coinbase <> currently has the following format.

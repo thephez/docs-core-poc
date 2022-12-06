@@ -1,5 +1,5 @@
 Reference
-=========
+#########
 
 The Developer Reference aims to provide technical details and API
 information to help you start building Dash-based applications, but it
@@ -43,5 +43,11 @@ errors.
 
 .. toctree::
    :maxdepth: 2
+   :caption: Core Reference
    
-   core-ref-block-chain
+   
+   block-chain
+   transactions
+   wallets
+   p2p-network
+   improvement-proposals

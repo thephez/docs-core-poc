@@ -1,3 +1,6 @@
+Serialized Blocks
+*****************
+
 Under current <>, a <> is not valid unless its serialized size is less
 than or equal to 2 MB. All fields described below are counted towards
 the serialized size.

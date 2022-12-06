@@ -1,3 +1,6 @@
+CoinJoin Messages
+*****************
+
 The following network messages all help control the CoinJoin features
 built into Dash and facilitated by the <> network.
 

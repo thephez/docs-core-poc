@@ -1,3 +1,6 @@
+Address Conversion
+******************
+
 The hashes used in P2PKH and <> are commonly encoded as Dash <>. This is
 the procedure to encode those hashes and decode the addresses.
 

@@ -47,12 +47,10 @@ Overview
 .. _core-reference:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
+   :titlesonly:
 
    docs/core/reference/introduction
-   docs/core/reference/block-chain
-   docs/core/reference/block-chain-block-headers
-   docs/core/reference/block-chain-serialized-blocks
 
 .. toctree::
    :maxdepth: 2

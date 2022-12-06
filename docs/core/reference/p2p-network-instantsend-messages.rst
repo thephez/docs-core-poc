@@ -1,3 +1,6 @@
+InstantSend Messages
+********************
+
 The following network messages all help control the InstantSend feature
 of Dash. InstantSend uses the masternode network to lock transaction
 inputs and enable secure, instantaneous transactions. For additional

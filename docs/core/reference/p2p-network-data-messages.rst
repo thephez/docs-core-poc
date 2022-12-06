@@ -1,3 +1,6 @@
+Data Messages
+*************
+
 The following network messages all request or provide data related to
 transactions and blocks.
 

@@ -1,3 +1,6 @@
+Special Transactions
+********************
+
 The <> framework established by
 `DIP2 <https://github.com/dashpay/dips/blob/master/dip-0002.md>`__
 enabled the implementation of new on-chain features and <> mechanisms.

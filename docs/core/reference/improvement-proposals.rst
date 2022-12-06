@@ -1,3 +1,6 @@
+Improvement Proposals
+*********************
+
 Dash (DIPs)
 ===========
 

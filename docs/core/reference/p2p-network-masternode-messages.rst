@@ -1,3 +1,6 @@
+Masternode Messages
+*******************
+
 The following network messages enable the <> features built in to Dash.
 
 .. figure:: https://dash-docs.github.io/img/dev/en-p2p-masternode-messages.svg

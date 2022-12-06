@@ -1,3 +1,6 @@
+Message Headers
+***************
+
 All messages in the network protocol use the same container format,
 which provides a required multi-field <> and an optional payload. The
 message header format is:

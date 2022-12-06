@@ -1,3 +1,6 @@
+Constants and Defaults
+**********************
+
 The following constants and defaults are taken from Dash Core’s
 `chainparams.cpp <https://github.com/dashpay/dash/blob/master/src/chainparams.cpp>`__
 source code file.

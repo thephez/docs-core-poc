@@ -1,3 +1,6 @@
+Governance Messages
+*******************
+
 The following <> messages enable the Governance features built in to
 Dash. For additional details on the governance system, see this `Budget
 System page <https://docs.dash.org/en/stable/governance/index.html>`__.
