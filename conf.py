@@ -84,10 +84,14 @@ todo_include_todos = False
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'myst_parser',
     'sphinx.ext.autodoc',
     'sphinx_copybutton',
     'sphinx_design',
 ]
+
+# Auto-generate header anchors for md headings
+myst_heading_anchors = 5
 
 html_theme = "pydata_sphinx_theme"
 
