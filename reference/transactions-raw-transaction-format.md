@@ -6,7 +6,7 @@ Dash Core and many other tools print and accept <<glossary:raw transactions>> en
 
 Transactions prior to protocol version 70209 defaulted to version 1. Transaction version 2 was the default in protocol versions => 70209 and < 70213. Version 2 transactions have the same format, but the `lock_time` parameter was redefined by [BIP68](https://github.com/bitcoin/bips/blob/master/bip-0068.mediawiki) to enable relative lock-times. (Note: transactions in the <<glossary:block chain>> are allowed to list a higher version number to permit <<glossary:soft forks>>, but they are treated as version 2 transactions by current software.)
 
-Dash Core 0.13.0 (protocol version 70213) introduced transaction version 3 as part of the [DIP2 - Special Transactions](https://github.com/dashpay/dips/blob/master/dip-0002.md) implementation. Details of the changes introduced by this feature and currently implemented <<glossary:special transactions>> can be found in the [Special Transactions section](core-ref-transactions-special-transactions) below as well as in the [DIP](https://github.com/dashpay/dips/blob/master/dip-0002.md).
+Dash Core 0.13.0 (protocol version 70213) introduced transaction version 3 as part of the [DIP2 - Special Transactions](https://github.com/dashpay/dips/blob/master/dip-0002.md) implementation. Details of the changes introduced by this feature and currently implemented <<glossary:special transactions>> can be found in the [Special Transactions section](../reference/transactions-special-transactions.md) below as well as in the [DIP](https://github.com/dashpay/dips/blob/master/dip-0002.md).
 
 A raw transaction has the following top-level format:
 
@@ -22,7 +22,7 @@ A raw transaction has the following top-level format:
 | *Varies* | extra_payload size | compactSize uint | *Added by DIP2 in v0.13.0*<br><br>Variable number of bytes of extra payload for DIP2-based special transactions
 | *Varies* | extra_payload | blob               | *Added by DIP2 in v0.13.0*<br><br>Special transaction payload.
 
-A transaction may have multiple <<glossary:inputs>> and <<glossary:outputs>>, so the txIn and txOut structures may recur within a transaction. <<glossary:CompactSize unsigned integers>> are a form of variable-length integers; they are described in the [CompactSize section](core-ref-transactions-compactsize-unsigned-integers).
+A transaction may have multiple <<glossary:inputs>> and <<glossary:outputs>>, so the txIn and txOut structures may recur within a transaction. <<glossary:CompactSize unsigned integers>> are a form of variable-length integers; they are described in the [CompactSize section](../reference/transactions-compactsize-unsigned-integers.md).
 
 ## JSON-RPC Responses
 
@@ -97,7 +97,7 @@ Each non- <<glossary:coinbase>> <<glossary:input>> spends an outpoint from a pre
 |----------|------------------|----------------------|--------------
 | 36       | previous_output  | <<glossary:outpoint>>             | The previous outpoint being spent.  See description of outpoint below.
 | *Varies* | script bytes     | compactSize uint     | The number of bytes in the signature script.  Maximum is 10,000 bytes.
-| *Varies* | signature script | char[]               | A script-language script which satisfies the conditions placed in the outpoint's pubkey script.  Should only contain data pushes; see the [signature script modification warning](core-ref-transactions-opcodes#signature_script_modification_warning).
+| *Varies* | signature script | char[]               | A script-language script which satisfies the conditions placed in the outpoint's pubkey script.  Should only contain data pushes; see the [signature script modification warning](../reference/transactions-opcodes.md#signature_script_modification_warning).
 | 4        | sequence         | uint32_t             | Sequence number.  Default for Dash Core and almost all other programs is 0xffffffff.
 
 **<span id="outpoint"></span>**
@@ -173,7 +173,7 @@ The first transaction in a <<glossary:block>>, called the <<glossary:coinbase tr
 | *Varies* | coinbase script    | *None*               | The <<glossary:coinbase field>>: Arbitrary data not exceeding 100 bytes minus the (4) height bytes.  Miners commonly place an extra nonce in this field to update the block header merkle root during hashing.
 | 4        | sequence           | uint32_t             | Sequence number.
 
-Although the coinbase script is arbitrary data, if it includes the bytes used by any signature-checking operations such as [`OP_CHECKSIG`](core-ref-transactions-opcodes#op_checksig), those signature checks will be counted as signature operations (sigops) towards the block's sigop limit.  To avoid this, you can prefix all data with the appropriate push operation.
+Although the coinbase script is arbitrary data, if it includes the bytes used by any signature-checking operations such as [`OP_CHECKSIG`](../reference/transactions-opcodes.md#op_checksig), those signature checks will be counted as signature operations (sigops) towards the block's sigop limit.  To avoid this, you can prefix all data with the appropriate push operation.
 
 An itemized <<glossary:coinbase transaction>>:
 

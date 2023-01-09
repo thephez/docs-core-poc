@@ -439,7 +439,7 @@ The special transaction type used for Quorum Commitment Transactions is 6 and th
 | ---------- | ----------- | -------- | -------- |
 | 2 | version | uint_16 | Quorum Commitment version number. Currently set to 1. Will change to 2 after Dash Core v18.0 hard fork.
 | 4 | height | uint32_t | Height of the block
-| Variable | commitment | qfcommit | The payload of the [`qfcommit` message](./core-ref-p2p-network-quorum-messages.md#qfcommit)
+| Variable | commitment | qfcommit | The payload of the [`qfcommit` message](./p2p-network-quorum-messages.md#qfcommit)
 
 The following annotated hexdump shows a QcTx transaction.
 

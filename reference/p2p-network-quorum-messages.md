@@ -6,7 +6,7 @@ The following network messages enable the long-living masternode quorum (<<gloss
 
 The following network messages enable the creation of long living masternode quorums (LLMQs) as described in [DIP6](https://github.com/dashpay/dips/blob/master/dip-0006.md).
 
-With the exception of the [`qfcommit` message](../ref/core-ref-p2p-network-quorum-messages.md#qfcommit), these messages are for intra-quorum communication only and are not propagated on the Dash network.
+With the exception of the [`qfcommit` message](../reference/p2p-network-quorum-messages.md#qfcommit), these messages are for intra-quorum communication only and are not propagated on the Dash network.
 
 ### qcontrib
 
@@ -17,13 +17,13 @@ With the exception of the [`qfcommit` message](../ref/core-ref-p2p-network-quoru
   "body": "This message is used for intra-quorum communication and is only sent to the <<glossary:masternodes>> in the LLMQ and <<glossary:nodes>> that are monitoring in Watch Mode for auditing/debugging purposes."
 }
 [/block]
-The [`qcontrib` message](../ref/core-ref-p2p-network-quorum-messages.md#qcontrib) is used by each member of the DKG process to send key contributions to all other members.
+The [`qcontrib` message](../reference/p2p-network-quorum-messages.md#qcontrib) is used by each member of the DKG process to send key contributions to all other members.
 
 | Bytes | Name | Data type | Description |
 | --- | --- | --- | --- |
 | 1 | llmqType | uint8_t | The type of LLMQ
 | 32 | quorumHash | uint256 | 	The quorum identifier
-| 32 | proTxHash | uint256 | The [ProRegTx](core-ref-transactions-special-transactions#proregtx) hash of the complaining member
+| 32 | proTxHash | uint256 | The [ProRegTx](../reference/transactions-special-transactions.md#proregtx) hash of the complaining member
 | 1-9 | vvecSize | compactSize uint | The size of the verification vector
 | 48 * `vvecSize` | vvec | BLSPubKey[] | The verification vector
 | 48 | ephemeralPubKey | BLSPubKey | Ephemeral BLS public key used to encrypt secret key contributions
@@ -34,7 +34,7 @@ The [`qcontrib` message](../ref/core-ref-p2p-network-quorum-messages.md#qcontrib
 
 More information can be found in the [Contribution phase section of DIP6](https://github.com/dashpay/dips/blob/master/dip-0006.md#2-contribution-phase).
 
-The following annotated hexdump shows a [`qcontrib` message](../ref/core-ref-p2p-network-quorum-messages.md#qcontrib). (The message header has been omitted.)
+The following annotated hexdump shows a [`qcontrib` message](../reference/p2p-network-quorum-messages.md#qcontrib). (The message header has been omitted.)
 
 ``` text
 01  ........................................ LLMQ Type: 1 (LLMQ_50_60)
@@ -99,18 +99,18 @@ e000da1aeda5f98ec9e64b801681bfc1 ........... BLS signature (Operator Key)
   "body": "This message is used for intra-quorum communication and is only sent to the <<glossary:masternodes>> in the LLMQ and <<glossary:nodes>> that are monitoring in Watch Mode for auditing/debugging purposes."
 }
 [/block]
-The [`qcomplaint` message](../ref/core-ref-p2p-network-quorum-messages.md#qcomplaint) is used to notify other members in the DKG process of any members that provided no contribution or an invalid secret key contribution. The notifications are divided into 2 fields:
+The [`qcomplaint` message](../reference/p2p-network-quorum-messages.md#qcomplaint) is used to notify other members in the DKG process of any members that provided no contribution or an invalid secret key contribution. The notifications are divided into 2 fields:
 
  - `badMembers` - Sets a bit for each member that failed to provide a contribution
  - `complaints` - Sets a bit for each member that provided an invalid contribution
 
-If a threshold number of quorum participants indicate a masternode didn't contribute, that masternode will be excluded from the quorum. Members that simply have a complaint against them are given an opportunity to respond (via a [`qjustify` message](../ref/core-ref-p2p-network-quorum-messages.md#qjustify)) to attempt to prove to all participants that they did participate.
+If a threshold number of quorum participants indicate a masternode didn't contribute, that masternode will be excluded from the quorum. Members that simply have a complaint against them are given an opportunity to respond (via a [`qjustify` message](../reference/p2p-network-quorum-messages.md#qjustify)) to attempt to prove to all participants that they did participate.
 
 | Bytes | Name | Data type | Description |
 | --- | --- | --- | --- |
 | 1 | llmqType | uint8_t | The type of LLMQ
 | 32 | quorumHash | uint256 | 	The quorum identifier
-| 32 | proTxHash | uint256 | The [ProRegTx](core-ref-transactions-special-transactions#proregtx) hash of the complaining member
+| 32 | proTxHash | uint256 | The [ProRegTx](../reference/transactions-special-transactions.md#proregtx) hash of the complaining member
 | 1-9 | badBitSize | compactSize uint | Number of bits in the bad members bitvector
 | (`badBitSize` + 7) / 8 | badMembers | byte[] | The bad members bitvector
 | 1-9 | complaintsBitSize | compactSize uint | Number of bits in the complaints bitvector
@@ -119,7 +119,7 @@ If a threshold number of quorum participants indicate a masternode didn't contri
 
 More information can be found in the [Complaining phase section of DIP6](https://github.com/dashpay/dips/blob/master/dip-0006.md#3-complaining-phase).
 
-The following annotated hexdump shows a [`qcomplaint` message](../ref/core-ref-p2p-network-quorum-messages.md#qcomplaint). (The message header has been omitted.)
+The following annotated hexdump shows a [`qcomplaint` message](../reference/p2p-network-quorum-messages.md#qcomplaint). (The message header has been omitted.)
 
 ``` text
 01 ......................................... LLMQ Type: 1 (LLMQ_50_60)
@@ -155,7 +155,7 @@ bb632eeb60f29e351963032a673abd61
 }
 [/block]
 
-The [`qdata` message](../ref/core-ref-p2p-network-quorum-messages.md#qdata) is used to send quorum DKG data to a node that has requested it via a [`qgetdata` message](../ref/core-ref-p2p-network-quorum-messages.md#qgetdata). The response will include one or more of the following depending on what was requested:
+The [`qdata` message](../reference/p2p-network-quorum-messages.md#qdata) is used to send quorum DKG data to a node that has requested it via a [`qgetdata` message](../reference/p2p-network-quorum-messages.md#qgetdata). The response will include one or more of the following depending on what was requested:
 - Quorum verification vector for the request quorum
 - Encrypted contributions for the request Protx hash
 
@@ -198,7 +198,7 @@ The [`qdata` message](../ref/core-ref-p2p-network-quorum-messages.md#qdata) is u
 | 0x05 | `QUORUM_VERIFICATION_VECTOR_MISSING` | The quorum verification vector for the requested quorum is missing internally.
 | 0x06 | `ENCRYPTED_CONTRIBUTIONS_MISSING` | The encrypted contributions for the requested member are missing for the requested quorum internally.
 
-The following annotated hexdump shows a [`qdata` message](../ref/core-ref-p2p-network-quorum-messages.md#qdata). (The message header has been omitted.)
+The following annotated hexdump shows a [`qdata` message](../reference/p2p-network-quorum-messages.md#qdata). (The message header has been omitted.)
 
 ``` text
 04 ......................................... LLMQ Type: 4 (LLMQ_100_67)
@@ -239,16 +239,16 @@ Data (Verification Vectors)
 }
 [/block]
 
-The [`qgetdata` message](../ref/core-ref-p2p-network-quorum-messages.md#qgetdata) is used to request DKG data from a masternode. The response to a `qgetdata` message is a [`qdata` message](../ref/core-ref-p2p-network-quorum-messages.md#qdata). These messages allows an LLMQ member to recover its DKG data if needed with the help of other members of that LLMQ type.
+The [`qgetdata` message](../reference/p2p-network-quorum-messages.md#qgetdata) is used to request DKG data from a masternode. The response to a `qgetdata` message is a [`qdata` message](../reference/p2p-network-quorum-messages.md#qdata). These messages allows an LLMQ member to recover its DKG data if needed with the help of other members of that LLMQ type.
 
 | Bytes | Name | Data type | Description |
 | --- | --- | --- | --- |
 | 1 | llmqType | uint8_t | The type of LLMQ
 | 32 | quorumHash | uint256 | The quorum identifier
 | 2 | dataMask | uint16_t | Specifies what data to request:<br>`1` - Quorum verification vector<br>`2` - Encrypted contributions for member defined by `proTxHash`  (`proTxHash` must be specified if this option is used)<br>`3` - Both verification vector and encrypted contributions
-| 32 | proTxHash | uint256 | The [ProRegTx](core-ref-transactions-special-transactions#proregtx) hash the contributions will be requested for. Must be a member of the specified LLMQ.
+| 32 | proTxHash | uint256 | The [ProRegTx](../reference/transactions-special-transactions.md#proregtx) hash the contributions will be requested for. Must be a member of the specified LLMQ.
 
-The following annotated hexdump shows a [`qgetdata` message](../ref/core-ref-p2p-network-quorum-messages.md#qgetdata). (The message header has been omitted.)
+The following annotated hexdump shows a [`qgetdata` message](../reference/p2p-network-quorum-messages.md#qgetdata). (The message header has been omitted.)
 
 ``` text
 04 ......................................... LLMQ Type: 4 (LLMQ_100_67)
@@ -272,13 +272,13 @@ c7ccb13df0c0e950b4d1b737808c2c72 ........... ProRegTx hash
   "body": "This message is used for intra-quorum communication and is only sent to the <<glossary:masternodes>> in the LLMQ and <<glossary:nodes>> that are monitoring in Watch Mode for auditing/debugging purposes."
 }
 [/block]
-The [`qjustify` message](../ref/core-ref-p2p-network-quorum-messages.md#qjustify) is used to respond to complaints. This provides a way for <<glossary:nodes>> that have been complained about to offer proof of correct behavior. If a valid justification is not provided, all other nodes mark it as a bad. If a valid justification is provided, the complaining node is marked as bad instead (since it submitted a bad complaint).
+The [`qjustify` message](../reference/p2p-network-quorum-messages.md#qjustify) is used to respond to complaints. This provides a way for <<glossary:nodes>> that have been complained about to offer proof of correct behavior. If a valid justification is not provided, all other nodes mark it as a bad. If a valid justification is provided, the complaining node is marked as bad instead (since it submitted a bad complaint).
 
 | Bytes | Name | Data type | Description |
 | --- | --- | --- | --- |
 | 1 | llmqType | uint8_t | The type of LLMQ
 | 32 | quorumHash | uint256 | 	The quorum identifier
-| 32 | proTxHash | uint256 | The [ProRegTx](core-ref-transactions-special-transactions#proregtx) hash of the complaining member
+| 32 | proTxHash | uint256 | The [ProRegTx](../reference/transactions-special-transactions.md#proregtx) hash of the complaining member
 | 1-9 | skContributions<br>Count | compactSize uint | Number of unencrypted secret key contributions
 | 36 * `skContributions`<br>`Count` | skContribution | SKContribution | Member index and secret key contribution for members justifying complaints
 | 96 | sig | byte[] | BLS signature, signed with the operator key of the contributing masternode
@@ -292,7 +292,7 @@ An `SKContribution` consists of:
 
 More information can be found in the [Justification phase section of DIP6](https://github.com/dashpay/dips/blob/master/dip-0006.md#4-justification-phase).
 
-The following annotated hexdump shows a [`qjustify` message](../ref/core-ref-p2p-network-quorum-messages.md#qjustify). (The message header has been omitted.)
+The following annotated hexdump shows a [`qjustify` message](../reference/p2p-network-quorum-messages.md#qjustify). (The message header has been omitted.)
 
 ``` text
 01 ......................................... LLMQ Type: 1 (LLMQ_50_60)
@@ -337,13 +337,13 @@ Contribution #2
   "body": "This message is used for intra-quorum communication and is only sent to the <<glossary:masternodes>> in the LLMQ and <<glossary:nodes>> that are monitoring in Watch Mode for auditing/debugging purposes."
 }
 [/block]
-The [`qpcommit` message](../ref/core-ref-p2p-network-quorum-messages.md#qpcommit) is used to exchange premature commitment messages for verification and selection of the final commitment.
+The [`qpcommit` message](../reference/p2p-network-quorum-messages.md#qpcommit) is used to exchange premature commitment messages for verification and selection of the final commitment.
 
 | Bytes | Name | Data type | Description |
 | --- | --- | --- | --- |
 | 1 | llmqType | uint8_t | The type of LLMQ
 | 32 | quorumHash | uint256 | The quorum identifier
-| 32 | proTxHash | uint256 | The [ProRegTx](core-ref-transactions-special-transactions#proregtx) hash of the complaining member
+| 32 | proTxHash | uint256 | The [ProRegTx](../reference/transactions-special-transactions.md#proregtx) hash of the complaining member
 | 1-9 | validMembersSize | compactSize uint | Bit size of the `validMembers` bitvector
 | (`valid`<br>`MembersSize` + 7) / 8 | validMembers | byte[] | Bitset of valid members in this commitment
 | 48 | quorumPublicKey | uint256 | The quorum public key
@@ -353,7 +353,7 @@ The [`qpcommit` message](../ref/core-ref-p2p-network-quorum-messages.md#qpcommit
 
 More information can be found in the [Commitment phase section of DIP6](https://github.com/dashpay/dips/blob/master/dip-0006.md#5-commitment-phase).
 
-The following annotated hexdump shows a [`qpcommit` message](../ref/core-ref-p2p-network-quorum-messages.md#qpcommit). (The message header has been omitted.)
+The following annotated hexdump shows a [`qpcommit` message](../reference/p2p-network-quorum-messages.md#qpcommit). (The message header has been omitted.)
 
 ``` text
 01 ......................................... LLMQ Type: 1 (LLMQ_50_60)
@@ -391,7 +391,7 @@ b6a5077267fdc61cdb192faffa27bed9
 
 ### qfcommit
 
-The [`qfcommit` message](../ref/core-ref-p2p-network-quorum-messages.md#qfcommit) is used to finalize a <<glossary:Long-Living Masternode Quorum>> setup by aggregating the information necessary to mine the on-chain [QcTx](core-ref-transactions-special-transactions#qctx) special transaction. The message contains all the necessary information required to validate the long-living masternode quorum's signing results.
+The [`qfcommit` message](../reference/p2p-network-quorum-messages.md#qfcommit) is used to finalize a <<glossary:Long-Living Masternode Quorum>> setup by aggregating the information necessary to mine the on-chain [QcTx](../reference/transactions-special-transactions.md#qctx) special transaction. The message contains all the necessary information required to validate the long-living masternode quorum's signing results.
 
 It is possible to receive multiple valid final commitments for the same DKG session. These should only differ in the number of signers, which can be ignored as long as there are at least `quorumThreshold` number of signers. The set of valid members for these final commitments should always be the same, as each member only creates a single premature commitment. This means that only one set of valid members (and thus only one quorum verification vector and quorum <<glossary:public key>>) can gain a majority. If the threshold is not reached, there will be no valid final commitment.
 [block:callout]
@@ -418,7 +418,7 @@ It is possible to receive multiple valid final commitments for the same DKG sess
 
 More information can be found in the [Finalization phase section of DIP6](https://github.com/dashpay/dips/blob/master/dip-0006.md#6-finalization-phase).
 
-The following annotated hexdump shows a _version 1_ [`qfcommit` message](../ref/core-ref-p2p-network-quorum-messages.md#qfcommit). (The message header has been omitted.)
+The following annotated hexdump shows a _version 1_ [`qfcommit` message](../reference/p2p-network-quorum-messages.md#qfcommit). (The message header has been omitted.)
 
 ``` text
 0100 ....................................... Message Version: 1
@@ -455,7 +455,7 @@ d78dc67e236b55086cbb0624c7f4abcc
 c8a042dc51aa58a26c134405fc3234ff ........... Quorum Aggregate BLS Sig
 ```
 
-The following annotated hexdump shows a _version 2_ [`qfcommit` message](../ref/core-ref-p2p-network-quorum-messages.md#qfcommit). (The message header has been omitted.)
+The following annotated hexdump shows a _version 2_ [`qfcommit` message](../reference/p2p-network-quorum-messages.md#qfcommit). (The message header has been omitted.)
 
 ``` text
 0200 ....................................... Message Version: 2
@@ -498,7 +498,7 @@ f33100bfba8f60342fd3a0cac17af370
 
 The following network messages enable the long living masternode quorum (LLMQ) message signing sessions described in [DIP7](https://github.com/dashpay/dips/blob/master/dip-0007.md).
 
-With the exception of the [`qsendrecsigs` message](../ref/core-ref-p2p-network-quorum-messages.md#qsendrecsigs) and the [`qsigrec` message](../ref/core-ref-p2p-network-quorum-messages.md#qsigrec), these messages are for intra-quorum communication only and are not propagated on the Dash network.
+With the exception of the [`qsendrecsigs` message](../reference/p2p-network-quorum-messages.md#qsendrecsigs) and the [`qsigrec` message](../reference/p2p-network-quorum-messages.md#qsigrec), these messages are for intra-quorum communication only and are not propagated on the Dash network.
 
 ### qbsigs
 
@@ -511,7 +511,7 @@ With the exception of the [`qsendrecsigs` message](../ref/core-ref-p2p-network-q
   "title": ""
 }
 [/block]
-The [`qbsigs` message](../ref/core-ref-p2p-network-quorum-messages.md#qbsigs) is used to send batched signature shares in response to a [`qgetsigs` message](../ref/core-ref-p2p-network-quorum-messages.md#qgetsigs).
+The [`qbsigs` message](../reference/p2p-network-quorum-messages.md#qbsigs) is used to send batched signature shares in response to a [`qgetsigs` message](../reference/p2p-network-quorum-messages.md#qgetsigs).
 
 [block:callout]
 {
@@ -532,7 +532,7 @@ CBatchedSigShares:
 | Varies | shareCount | compactSize uint | Number of shares |
 | shareCount * 98 | sigShares | <uint16_t, CBLSLazySignature> | Index (2 bytes) and BLS Signature share (96 bytes) |
 
-The following annotated hexdump shows a [`qbsigs` message](../ref/core-ref-p2p-network-quorum-messages.md#qbsigs). (The message header has been omitted.)
+The following annotated hexdump shows a [`qbsigs` message](../reference/p2p-network-quorum-messages.md#qbsigs). (The message header has been omitted.)
 
 ``` text
 02 ......................................... Number of signature share batches: 2
@@ -578,11 +578,11 @@ Signature Share Batch 2
   "body": "This message is used for intra-quorum communication and is only sent to the <<glossary:masternodes>> in the LLMQ and <<glossary:nodes>> that are monitoring in Watch Mode for auditing/debugging purposes."
 }
 [/block]
-The [`qgetsigs` message](../ref/core-ref-p2p-network-quorum-messages.md#qgetsigs) is used to request signature shares. The response to a [`qgetsigs` message](../ref/core-ref-p2p-network-quorum-messages.md#qgetsigs) is a [`qbsigs` message](../ref/core-ref-p2p-network-quorum-messages.md#qbsigs).
+The [`qgetsigs` message](../reference/p2p-network-quorum-messages.md#qgetsigs) is used to request signature shares. The response to a [`qgetsigs` message](../reference/p2p-network-quorum-messages.md#qgetsigs) is a [`qbsigs` message](../reference/p2p-network-quorum-messages.md#qbsigs).
 [block:callout]
 {
   "type": "info",
-  "body": "The number of inventories in a [`qgetsigs` message](../ref/core-ref-p2p-network-quorum-messages.md#qgetsigs) is limited to 200 (as defined by `MAX_MSGS_CNT_QGETSIGSHARES` in Dash Core)."
+  "body": "The number of inventories in a [`qgetsigs` message](../reference/p2p-network-quorum-messages.md#qgetsigs) is limited to 200 (as defined by `MAX_MSGS_CNT_QGETSIGSHARES` in Dash Core)."
 }
 [/block]
 | Bytes | Name | Data type | Description |
@@ -592,7 +592,7 @@ The [`qgetsigs` message](../ref/core-ref-p2p-network-quorum-messages.md#qgetsigs
 | Varies | invSize | compactSize uint | Inventory size
 | Varies | inv | CAutoBitSet | Quorum signature inventory |
 
-The following annotated hexdump shows a [`qgetsigs` message](../ref/core-ref-p2p-network-quorum-messages.md#qgetsigs). (The message header has been omitted.)
+The following annotated hexdump shows a [`qgetsigs` message](../reference/p2p-network-quorum-messages.md#qgetsigs). (The message header has been omitted.)
 
 ``` text
 02 ......................................... Count: 2
@@ -612,7 +612,7 @@ Signature share request 2
 
 *Added in protocol version 70214 of Dash Core*
 
-The [`qsendrecsigs` message](../ref/core-ref-p2p-network-quorum-messages.md#qsendrecsigs) is used to notify a <<glossary:peer>> to send plain <<glossary:LLMQ>> recovered signatures (inventory type `MSG_QUORUM_RECOVERED_SIG`). Otherwise the peer would only announce/send the higher level messages produced when a recovered signature is found (e.g. InstantSend [`islock` messages](../ref/core-ref-p2p-network-instantsend-messages.md#islock) or ChainLock [`clsig` messages](../ref/core-ref-p2p-network-instantsend-messages.md#clsig)).
+The [`qsendrecsigs` message](../reference/p2p-network-quorum-messages.md#qsendrecsigs) is used to notify a <<glossary:peer>> to send plain <<glossary:LLMQ>> recovered signatures (inventory type `MSG_QUORUM_RECOVERED_SIG`). Otherwise the peer would only announce/send the higher level messages produced when a recovered signature is found (e.g. InstantSend [`islock` messages](../reference/p2p-network-instantsend-messages.md#islock) or ChainLock [`clsig` messages](../reference/p2p-network-instantsend-messages.md#clsig)).
 [block:callout]
 {
   "type": "info",
@@ -623,7 +623,7 @@ The [`qsendrecsigs` message](../ref/core-ref-p2p-network-quorum-messages.md#qsen
 | --- | --- | --- | --- |
 | 1 | fSendRecSigs | bool | 0 - Notify peer to not send plain LLMQ recovered signatures<br>1 - Notify peer to send plain LLMQ recovered signatures (default for Dash Core nodes)
 
-The following annotated hexdump shows a [`qsendrecsigs` message](../ref/core-ref-p2p-network-quorum-messages.md#qsendrecsigs). (The message header has been omitted.)
+The following annotated hexdump shows a [`qsendrecsigs` message](../reference/p2p-network-quorum-messages.md#qsendrecsigs). (The message header has been omitted.)
 
 ``` text
 01 ................................. Request recovered signatures: Enabled (1)
@@ -633,7 +633,7 @@ The following annotated hexdump shows a [`qsendrecsigs` message](../ref/core-ref
 
 *Added in protocol version 70214 of Dash Core*
 
-The [`qsigrec` message](../ref/core-ref-p2p-network-quorum-messages.md#qsigrec) is used to provide recovered signatures and related quorum details to <<glossary:nodes>> that have requested this information via the [`qsendrecsigs` message](../ref/core-ref-p2p-network-quorum-messages.md#qsendrecsigs).
+The [`qsigrec` message](../reference/p2p-network-quorum-messages.md#qsigrec) is used to provide recovered signatures and related quorum details to <<glossary:nodes>> that have requested this information via the [`qsendrecsigs` message](../reference/p2p-network-quorum-messages.md#qsendrecsigs).
 
 | Bytes | Name | Data type | Description |
 | --- | --- | --- | --- |
@@ -645,9 +645,9 @@ The [`qsigrec` message](../ref/core-ref-p2p-network-quorum-messages.md#qsigrec) 
 
 More information can be found in the [Recovered threshold signatures section of DIP7](https://github.com/dashpay/dips/blob/master/dip-0007.md#recovered-threshold-signatures).
 
-The following annotated hexdump shows a [`qsigrec` message](../ref/core-ref-p2p-network-quorum-messages.md#qsigrec). (The message header has been omitted.)
+The following annotated hexdump shows a [`qsigrec` message](../reference/p2p-network-quorum-messages.md#qsigrec). (The message header has been omitted.)
 
-**Note:** The following [`qsigrec` message](../ref/core-ref-p2p-network-quorum-messages.md#qsigrec) corresponds to the example [`islock` message](../ref/core-ref-p2p-network-instantsend-messages.md#islock) hexdump. The message hash below corresponds to the `islock` TXID field and the BLS signature matches the BLS signature of the `islock` example.
+**Note:** The following [`qsigrec` message](../reference/p2p-network-quorum-messages.md#qsigrec) corresponds to the example [`islock` message](../reference/p2p-network-instantsend-messages.md#islock) hexdump. The message hash below corresponds to the `islock` TXID field and the BLS signature matches the BLS signature of the `islock` example.
 
 ``` text
 01 ......................................... LLMQ Type: 1 (LLMQ_50_60)
@@ -679,12 +679,12 @@ a11e5e7930deccc3e11a931fc9524f06 ........... LLMQ BLS Signature (96 bytes)
   "body": "This message is used for intra-quorum communication and is only sent to the <<glossary:masternodes>> in the LLMQ and <<glossary:nodes>> that are monitoring in Watch Mode for auditing/debugging purposes."
 }
 [/block]
-The [`qsigsesann` message](../ref/core-ref-p2p-network-quorum-messages.md#qsigsesann) is used to announce the sessionId for a signing session. The sessionId will be used for all P2P messages related to that session.
+The [`qsigsesann` message](../reference/p2p-network-quorum-messages.md#qsigsesann) is used to announce the sessionId for a signing session. The sessionId will be used for all P2P messages related to that session.
 
 [block:callout]
 {
   "type": "info",
-  "body": "The maximum number of announcements in a [`qsigsesann` message](../ref/core-ref-p2p-network-quorum-messages.md#qsigsesann) is limited to 100 (as defined by `MAX_MSGS_CNT_QSIGSESANN` in Dash Core)."
+  "body": "The maximum number of announcements in a [`qsigsesann` message](../reference/p2p-network-quorum-messages.md#qsigsesann) is limited to 100 (as defined by `MAX_MSGS_CNT_QSIGSESANN` in Dash Core)."
 }
 [/block]
 | Bytes | Name | Data type | Description |
@@ -696,7 +696,7 @@ The [`qsigsesann` message](../ref/core-ref-p2p-network-quorum-messages.md#qsigse
 | 32 | id | uint256 | The signing request id
 | 32 | msgHash | uint256 | The message hash
 
-The following annotated hexdump shows a [`qsigsesann` message](../ref/core-ref-p2p-network-quorum-messages.md#qsigsesann). (The message header has been omitted.)
+The following annotated hexdump shows a [`qsigsesann` message](../reference/p2p-network-quorum-messages.md#qsigsesann). (The message header has been omitted.)
 
 ``` text
 02 ......................................... Count: 2
@@ -739,13 +739,13 @@ Session Announcement 2
   "body": "This message is used for intra-quorum communication and is only sent to the <<glossary:masternodes>> in the LLMQ and <<glossary:nodes>> that are monitoring in Watch Mode for auditing/debugging purposes."
 }
 [/block]
-The [`qsigshare` message](../ref/core-ref-p2p-network-quorum-messages.md#qsigshare) (quorum signature share) announces one or more quorum signature shares known by the transmitting peer.
+The [`qsigshare` message](../reference/p2p-network-quorum-messages.md#qsigshare) (quorum signature share) announces one or more quorum signature shares known by the transmitting peer.
 
 
 [block:callout]
 {
   "type": "info",
-  "body": "The maximum number of shares in a [`qsigshare` message](../ref/core-ref-p2p-network-quorum-messages.md#qsigshare) is limited to 32 (as defined by `MAX_MSGS_SIG_SHARES` in Dash Core)."
+  "body": "The maximum number of shares in a [`qsigshare` message](../reference/p2p-network-quorum-messages.md#qsigshare) is limited to 32 (as defined by `MAX_MSGS_SIG_SHARES` in Dash Core)."
 }
 [/block]
 | Bytes | Name | Data type | Description |
@@ -757,7 +757,7 @@ The [`qsigshare` message](../ref/core-ref-p2p-network-quorum-messages.md#qsigsha
 | 32 | msgHash | uint256 | The message hash
 | 96 | sigShare | byte[] | The final recovered BLS threshold signature
 
-The following annotated hexdump shows a [`qsigshare` message](../ref/core-ref-p2p-network-quorum-messages.md#qsigshare). (The message header has been omitted.)
+The following annotated hexdump shows a [`qsigshare` message](../reference/p2p-network-quorum-messages.md#qsigshare). (The message header has been omitted.)
 
 ``` text
 01 ......................................... Count: 1
@@ -794,12 +794,12 @@ a277386b48a7ae627d075da826aab694 ......... Signature Share
   "title": ""
 }
 [/block]
-The [`qsigsinv` message](../ref/core-ref-p2p-network-quorum-messages.md#qsigsinv) (quorum signature inventory) announces one or more quorum signature share inventories known by the transmitting peer.
+The [`qsigsinv` message](../reference/p2p-network-quorum-messages.md#qsigsinv) (quorum signature inventory) announces one or more quorum signature share inventories known by the transmitting peer.
 
 [block:callout]
 {
   "type": "info",
-  "body": "The maximum number of inventories in a [`qsigsinv` message](../ref/core-ref-p2p-network-quorum-messages.md#qsigsinv) is limited to 200 (as defined by `MAX_MSGS_CNT_QSIGSHARESINV` in Dash Core)."
+  "body": "The maximum number of inventories in a [`qsigsinv` message](../reference/p2p-network-quorum-messages.md#qsigsinv) is limited to 200 (as defined by `MAX_MSGS_CNT_QSIGSHARESINV` in Dash Core)."
 }
 [/block]
 | Bytes | Name | Data type | Description |
@@ -809,7 +809,7 @@ The [`qsigsinv` message](../ref/core-ref-p2p-network-quorum-messages.md#qsigsinv
 | Varies | invSize | compactSize uint | Inventory size
 | Varies | inv | CAutoBitSet | Quorum signature inventory |
 
-The following annotated hexdump shows a [`qsigsinv` message](../ref/core-ref-p2p-network-quorum-messages.md#qsigsinv). (The message header has been omitted.)
+The following annotated hexdump shows a [`qsigsinv` message](../reference/p2p-network-quorum-messages.md#qsigsinv). (The message header has been omitted.)
 
 ``` text
 02 ......................................... Count: 2
@@ -829,8 +829,8 @@ The following annotated hexdump shows a [`qsigsinv` message](../ref/core-ref-p2p
 
 *Added in protocol version 70214 of Dash Core*
 
-The [`qwatch` message](../ref/core-ref-p2p-network-quorum-messages.md#qwatch) tells the receiving <<glossary:peer>> to relay <<glossary:LLMQ>> [DKG messages](#distributed-key-generation) and [Signing session messages](#signing-sessions) (e.g., [`qcontrib`](../ref/core-ref-p2p-network-quorum-messages.md#qcontrib)).
+The [`qwatch` message](../reference/p2p-network-quorum-messages.md#qwatch) tells the receiving <<glossary:peer>> to relay <<glossary:LLMQ>> [DKG messages](#distributed-key-generation) and [Signing session messages](#signing-sessions) (e.g., [`qcontrib`](../reference/p2p-network-quorum-messages.md#qcontrib)).
 
 This message is sent when a Dash Core node is started with the [`-watchquorums` option](dash-core-wallet-arguments-and-commands-dashd#debuggingtesting-options) enabled.
 
-There is no payload in a [`qwatch` message](../ref/core-ref-p2p-network-quorum-messages.md#qwatch).  See the [message header section](core-ref-p2p-network-message-headers) for an example of a message without a payload.
+There is no payload in a [`qwatch` message](../reference/p2p-network-quorum-messages.md#qwatch).  See the [message header section](../reference/p2p-network-message-headers.md) for an example of a message without a payload.
