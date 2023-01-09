@@ -99,7 +99,7 @@ html_theme_options = {
         {"name": "Dash.org", "url": "https://www.dash.org"},
     ],
     "use_edit_page_button": True,
-    "github_url": "https://github.com/dashpay/docs",
+    "github_url": "https://github.com/thephez/docs-core",
     "show_toc_level": 2,
     "show_nav_level": 1,
     "favicons": [
@@ -128,9 +128,9 @@ html_theme_options = {
 
 html_context = {
     # "github_url": "https://github.com", # or your GitHub Enterprise site
-    "github_user": "dashpay",
-    "github_repo": "docs",
-    "github_version": "18.0.0",
+    "github_user": "thephez",
+    "github_repo": "docs-core",
+    "github_version": "main",
     "doc_path": "",
 }
 
